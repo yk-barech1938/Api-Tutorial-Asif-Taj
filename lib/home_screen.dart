@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // extra work because we dont have array name in response
+  // extra work because we don't have array name in response
   // in response it is just returning objects in array
   List<PostsModel> postList = [];
   // response is future, because if we hit the api end url we wait
@@ -30,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
         postList.add(PostsModel.fromJson(i));
       }
       return postList;
-    } else {return postList;}
+    } else {
+      return postList;
+    }
   }
 
   @override
@@ -39,8 +41,32 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('API Asif Taj'),
       ),
-      body: const Column(
-        children: [],
+      body: Column(
+        children: [
+        // occupies the data in show data in scrolling
+          Expanded(
+            // showing the api data we use future builders
+            child: FutureBuilder(
+              future: getAllPostsApi(),
+              builder: (context, snapshot) {
+                // initially hitting api we don't have data, we use not ! data
+                if (!snapshot.hasData) {
+                  return const Text('Loading');
+                } else {
+                  // using ListView.builder now we are getting a Complete list in response
+                  return ListView.builder(
+                    itemCount: postList.length,
+                    itemBuilder: (context, index) {
+                      return Text(
+                        index.toString(),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
