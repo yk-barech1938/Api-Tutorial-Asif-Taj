@@ -26,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // every response is coming with the its status code
     if (response.statusCode == 200) {
+      // must add this line when we hot refresh it wont reload the screen
+      postList.clear();
       for (Map i in data) {
         postList.add(PostsModel.fromJson(i));
       }
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('API Asif Taj'),
+        title: const Center(child: Text('API Asif Taj')),
       ),
       body: Column(
         children: [
@@ -57,8 +59,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                     itemCount: postList.length,
                     itemBuilder: (context, index) {
-                      return Text(
-                        index.toString(),
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Title:',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                              Text(postList[index].title.toString()),
+                              const SizedBox(height: 5,),
+                              Text('Description:',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                              Text(postList[index].body.toString()),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   );
