@@ -1,3 +1,4 @@
+import 'package:apitutorialasiftaj/example_two.dart';
 import 'package:apitutorialasiftaj/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: HomeScreen(),
+      home: const ExampleTwo(),
     );
   }
 }
