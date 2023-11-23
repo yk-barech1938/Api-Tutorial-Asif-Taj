@@ -14,7 +14,7 @@ class _ExampleTwoState extends State<ExampleTwo> {
   List<Photos> photosList = [];
   Future<List<Photos>> getAllPhotos() async {
     final response = await http
-        .get(Uri.parse('test'));
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
     var data = jsonDecode(response.body.toString());
 
     if (response.statusCode == 200) {
@@ -51,7 +51,7 @@ class _ExampleTwoState extends State<ExampleTwo> {
                             backgroundImage: NetworkImage(snapshot.data![index].url.toString()),
                           ),
 
-                          title: Text('Posts Id: ${snapshot.data![index].id ?? "No ID"}'),
+                          title: Text('Posts Id: ${snapshot.data![index].id}'),
                           subtitle: Text(snapshot.data![index].title?.toString() ?? "No title"),
                         );
                       });
