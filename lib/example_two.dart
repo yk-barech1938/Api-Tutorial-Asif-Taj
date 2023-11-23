@@ -14,7 +14,7 @@ class _ExampleTwoState extends State<ExampleTwo> {
   List<Photos> photosList = [];
   Future<List<Photos>> getAllPhotos() async {
     final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+        .get(Uri.parse('test'));
     var data = jsonDecode(response.body.toString());
 
     if (response.statusCode == 200) {
